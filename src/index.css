@@ -135,6 +135,7 @@ li {
 }
 
 .heart-button {
+  outline: none;
   background: transparent;
   border: none;
 }

@@ -21,15 +21,21 @@ export default (state = {}, action) => {
         }
       };
     case ADD_TWEET:
-      // const { tweet } = action;
-      // let replyingTo = {};
-      // if (tweet.replyingTo) {
-      //   [tweet.replyingTo]:
-      // }
-      // return {
-      //   ...state,
-      //   [tweet.id]: tweet
-      // };
+      const { tweet } = action;
+      let replyingTo = {};
+      if (tweet.replyingTo) {
+        replyingTo = {
+          [tweet.replyingTo]: {
+            ...state[tweet.replyingTo],
+            replies: state[tweet.replyingTo].replies.concat([tweet.id])
+          }
+        }
+      }
+      return {
+        ...state,
+        [tweet.id]: tweet,
+        ...replyingTo
+      };
     default:
       return state;
   }
